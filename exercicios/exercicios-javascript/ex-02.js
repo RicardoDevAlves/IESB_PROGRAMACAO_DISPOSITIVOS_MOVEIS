@@ -2,8 +2,8 @@
 // Crie um script que receba dois números e faça as seguintes operações:
 
 // somando dois números:
-let num1 = 7
-let num2 = 3
+let num1 = 15
+let num2 = 5
 console.log("Primeiro número: "+ num1)
 console.log("Segundo número: "+num2)
 
