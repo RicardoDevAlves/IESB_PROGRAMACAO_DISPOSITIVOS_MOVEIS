@@ -18,7 +18,7 @@ function triplo(numero) {
 triplo(5)
 
 function quadrado(numero) {
-    let resultado = numero ** 4
+    let resultado = numero ** 2
     console.log("O quadrado de "+numero+" é "+resultado)
 }
 quadrado(5)
