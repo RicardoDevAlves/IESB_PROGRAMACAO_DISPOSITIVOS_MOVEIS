@@ -5,4 +5,10 @@
 // 3. Crie um novo array com o comprimento de cada string.
 // Utilize o array ["Maçã", "Banana", "Abacaxi", "Laranja"] para os testes.
 
-listaFrutas = ["Maçã", "Banana", "Abacaxi", "Laranja"]
+let listaFrutas = ["Maçã", "Banana", "Abacaxi", "Laranja"]
+
+let frutasMaiúsculas = listaFrutas.map(fruta => fruta.toUpperCase())
+console.log(frutasMaiúsculas)
+
+let frutasComA = listaFrutas.filter(fruta => fruta.startsWith("A"))
+console.log(frutasComA)
