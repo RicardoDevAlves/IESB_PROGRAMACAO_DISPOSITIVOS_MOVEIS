@@ -1,6 +1,6 @@
 npm install -g expo-cli ( instalando o terminal CLI no PC)
 npx create-expo-app@latest nome-do-projeto --template blank ( criando um projeto em react-native)
-npm start
+npm start (dentro da pasta do projeto)
 
 
 
