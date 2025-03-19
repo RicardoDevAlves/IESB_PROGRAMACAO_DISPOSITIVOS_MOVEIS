@@ -24,11 +24,19 @@ export default function App() {
         }}
 
         style={{
-          height: 400,
-          width: 400
+          height: 300,
+          width: 300
+        }}      
+      />
+      <Image
+        source={require('./imagens/gsxs1000.jpg')}
+
+        style={{
+          height: '300',
+          weith: '100',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
-      
-      
       />
 
       <Text>Texto dentro</Text>
