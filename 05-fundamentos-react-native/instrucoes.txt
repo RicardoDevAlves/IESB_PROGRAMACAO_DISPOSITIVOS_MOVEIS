@@ -10,3 +10,4 @@ npx create-expo-app@latest nome-do-projeto --template blank ( criando um projeto
 
 
 * Observação: Tudo que estiver dentro de "return" será exibido ao usuário.
+*Função: Para criar uma função, usa-se "rnfs"

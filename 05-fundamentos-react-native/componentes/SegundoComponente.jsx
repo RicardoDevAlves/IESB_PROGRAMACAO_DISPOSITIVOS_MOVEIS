@@ -1,7 +1,14 @@
 import React from "react";
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 export default function () {
 
-    return <Text>Segundo Componente</Text>
+    return <Text style={style.textoPequeno}>Segundo Componente</Text>
 }
+
+const style = StyleSheet.create({
+    textoPequeno: {
+        fontSize: 35,
+        fontWeight: 600
+    }
+});

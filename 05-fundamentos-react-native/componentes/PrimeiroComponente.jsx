@@ -5,17 +5,15 @@ export default function PrimeiroComponente() {
 
     return (
         <View>
-            <Text>Primeiro Componente</Text>
+            <Text style={styles.textoGrande}>Primeiro Componente</Text>
         </View>
     )
 
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'yellow',
-      alignItems: 'center',
-      justifyContent: 'center',
+    textoGrande: {
+        fontSize: 45,
+        fontWeight: 900
     }
 });
