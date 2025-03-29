@@ -60,10 +60,11 @@ export default function App() {
 
   return (
     <ScrollView>
+      <View>
       <View style={styles.container}>
         <StatusBar style="auto" />
 
-        <Text style={styles.titulo}>Lista de Filmes</Text>
+        <Text style={styles.titulo}>Filmes</Text>
 
         {listaFilmes.map((filme) => {
           return (
@@ -77,7 +78,7 @@ export default function App() {
           );
         })}
 
-        <Text style={styles.titulo}>Lista de Séries</Text>
+        <Text style={styles.titulo}>Séries</Text>
 
         {listaSeries.map((serie) => {
           return (
@@ -91,6 +92,7 @@ export default function App() {
           );
         })}
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -98,20 +100,19 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "grey",
+    backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
     
   },
   titulo: {
-    backgroundColor: 'grey',
-    color: 'blue',
+    backgroundColor: 'black',
+    color: 'white',
     fontSize: 40,
     fontStyle: 'italic',
     fontWeight: 'bold',
     marginTop: 50,
     textAlign: 'center',
     paddingBlock: 2,
-    width: 394,
   }
 });
