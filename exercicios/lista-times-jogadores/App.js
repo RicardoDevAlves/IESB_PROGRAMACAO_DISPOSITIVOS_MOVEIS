@@ -1,101 +1,66 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
-import Jogador from './componentes/Jogador';
+import { View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { Provider as PaperProvider, Text, useTheme } from 'react-native-paper';
+import Time from './componentes/Time';
 
-const times = [/* sua lista de times aqui */];
+const times = [
+  {
+    nome: "Flamengo",
+    anoFundacao: 1895,
+    mascote: "Urubu",
+    imagem: "https://i.pinimg.com/236x/16/db/d2/16dbd20fd582e025dc54cc3fbd1839c9.jpg",
+    jogadores: [
+      { nome: "Gabriel Barbosa", numero: 9, imagem: "https://i.pinimg.com/474x/1d/9f/5d/1d9f5de58831c9913f925a7155bdc7da.jpg" },
+      // ... outros jogadores
+    ],
+  },
+  // ... outros times
+];
+
+const StreamTheme = {
+  dark: true,
+  colors: {
+    primary: '#E50914',
+    background: '#121212',
+    surface: '#1E1E1E',
+    accent: '#FF5722',
+    text: '#FFFFFF',
+    secondaryText: '#B3B3B3',
+    error: '#FF5252',
+  },
+  roundness: 8,
+};
 
 export default function App() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Times de Futebol</Text>
-            
-            <FlatList
-                data={times}
-                keyExtractor={(item) => item.nome}
-                renderItem={({ item: time }) => (
-                    <View style={styles.timeContainer}>
-                        <View style={styles.timeHeader}>
-                            <Image source={{ uri: time.imagem }} style={styles.timeLogo} />
-                            <View style={styles.timeInfo}>
-                                <Text style={styles.timeNome}>{time.nome}</Text>
-                                <Text>Fundado em: {time.anoFundacao}</Text>
-                                <Text>Mascote: {time.mascote}</Text>
-                            </View>
-                        </View>
-                        
-                        <Text style={styles.jogadoresTitulo}>Jogadores:</Text>
-                        <FlatList
-                            horizontal
-                            data={time.jogadores}
-                            keyExtractor={(jogador) => `${time.nome}-${jogador.nome}`}
-                            renderItem={({ item: jogador }) => (
-                                <Jogador
-                                    nome={jogador.nome}
-                                    numero={jogador.numero}
-                                    imagem={jogador.imagem}
-                                />
-                            )}
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={styles.listaJogadores}
-                        />
-                    </View>
-                )}
-                contentContainerStyle={styles.listaTimes}
-            />
-        </View>
-    );
+  return (
+    <PaperProvider theme={StreamTheme}>
+      <View style={styles.container}>
+        <Text style={styles.headerTitle}>Clube de Futebol</Text>
+        
+        <FlatList
+          data={times}
+          keyExtractor={(item) => item.nome}
+          renderItem={({ item }) => <Time time={item} />}
+          contentContainerStyle={styles.listContainer}
+        />
+      </View>
+    </PaperProvider>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#f5f5f5',
-    },
-    titulo: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    listaTimes: {
-        paddingBottom: 20,
-    },
-    timeContainer: {
-        marginBottom: 30,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
-    },
-    timeHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 15,
-    },
-    timeLogo: {
-        width: 70,
-        height: 70,
-        marginRight: 15,
-    },
-    timeInfo: {
-        flex: 1,
-    },
-    timeNome: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    jogadoresTitulo: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    listaJogadores: {
-        paddingHorizontal: 5,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: StreamTheme.colors.background,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: StreamTheme.colors.primary,
+    padding: 16,
+    marginTop: 8,
+  },
+  listContainer: {
+    paddingBottom: 40,
+  },
 });

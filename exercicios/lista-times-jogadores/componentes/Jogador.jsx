@@ -1,53 +1,59 @@
-// componentes/Jogador.jsx
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Card, Title, Text, useTheme } from 'react-native-paper';
 
-const Jogador = ({ nome, numero, imagem }) => {
-    return (
-        <View style={styles.card}>
-            <Image source={{ uri: imagem }} style={styles.imagem} />
-            <View style={styles.info}>
-                <Text style={styles.nome}>{nome}</Text>
-                <Text style={styles.numero}>Número: {numero}</Text>
-            </View>
-        </View>
-    );
+const Jogador = ({ jogador }) => {
+  const theme = useTheme();
+  
+  return (
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={styles.touchable}
+    >
+      <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
+        <Card.Cover 
+          source={{ uri: jogador.imagem }} 
+          style={styles.playerImage} 
+        />
+        <Card.Content style={styles.playerInfo}>
+          <Title style={[styles.playerName, { color: theme.colors.text }]}>
+            {jogador.nome}
+          </Title>
+          <Text style={[styles.playerNumber, { color: theme.colors.secondaryText }]}>
+            #{jogador.numero}
+          </Text>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+  );
 };
 
 const styles = StyleSheet.create({
-    card: {
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 8,
-        padding: 10,
-        margin: 10,
-        width: 180,
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
-    },
-    imagem: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        marginBottom: 10,
-    },
-    info: {
-        alignItems: 'center',
-    },
-    nome: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    numero: {
-        fontSize: 14,
-        color: '#666',
-    },
+  touchable: {
+    marginRight: 12,
+    borderRadius: 8,
+  },
+  card: {
+    width: 140,
+    borderRadius: 8,
+    elevation: 3,
+  },
+  playerImage: {
+    height: 160,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  playerInfo: {
+    padding: 8,
+  },
+  playerName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  playerNumber: {
+    fontSize: 12,
+  },
 });
 
 export default Jogador;

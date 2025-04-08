@@ -1,84 +1,67 @@
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
-import React from 'react'
-import Jogador from './Jogador'
+import React from 'react';
+import { View, FlatList, StyleSheet } from 'react-native';
+import { Card, Title, Text, useTheme } from 'react-native-paper';
+import Jogador from './Jogador';
 
 const Time = ({ time }) => {
+  const theme = useTheme();
+  
   return (
-    <View style={styles.timeContainer}>
-      <View style={styles.timeHeader}>
-        <Image source={{ uri: time.imagem }} style={styles.timeLogo} />
-        <View style={styles.timeInfo}>
-          <Text style={styles.timeNome}>{time.nome}</Text>
-          <Text style={styles.timeDetails}>Fundado em: {time.anoFundacao}</Text>
-          <Text style={styles.timeDetails}>Mascote: {time.mascote}</Text>
+    <View style={[styles.section, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.sectionHeader}>
+        <Card.Cover 
+          source={{ uri: time.imagem }} 
+          style={styles.teamLogo} 
+        />
+        <View>
+          <Title style={{ color: theme.colors.text }}>{time.nome}</Title>
+          <Text style={{ color: theme.colors.secondaryText }}>
+            {time.anoFundacao} • {time.mascote}
+          </Text>
         </View>
       </View>
+
+      <Text style={[styles.subtitle, { color: theme.colors.text }]}>Elenco Principal</Text>
       
-      <Text style={styles.jogadoresTitulo}>Jogadores:</Text>
       <FlatList
         horizontal
         data={time.jogadores}
-        keyExtractor={(jogador) => `${time.nome}-${jogador.nome}`}
-        renderItem={({ item }) => (
-          <Jogador
-            nome={item.nome}
-            numero={item.numero}
-            imagem={item.imagem}
-          />
-        )}
+        keyExtractor={(item) => `${time.nome}-${item.nome}`}
+        renderItem={({ item }) => <Jogador jogador={item} />}
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.listaJogadores}
+        contentContainerStyle={styles.playersList}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  timeContainer: {
-    marginBottom: 30,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+  section: {
+    marginVertical: 16,
+    paddingVertical: 8,
   },
-  timeHeader: {
+  sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
+    paddingHorizontal: 16,
+    marginBottom: 12,
   },
-  timeLogo: {
-    width: 70,
-    height: 70,
-    marginRight: 15,
-    borderRadius: 35,
+  teamLogo: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 12,
+    resizeMode: 'contain',
   },
-  timeInfo: {
-    flex: 1,
-  },
-  timeNome: {
+  subtitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
-    color: '#333',
+    paddingHorizontal: 16,
+    marginBottom: 8,
   },
-  timeDetails: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 2,
+  playersList: {
+    paddingLeft: 16,
   },
-  jogadoresTitulo: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  listaJogadores: {
-    paddingHorizontal: 5,
-  },
-})
+});
 
-export default Time
+export default Time;
