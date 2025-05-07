@@ -3,10 +3,14 @@ import React from 'react'
 
 export default function ProfileScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Tela de PERFIL DE USUÁRIO</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'pink'
+  }
+})
