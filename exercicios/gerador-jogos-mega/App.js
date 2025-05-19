@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import MegaSenaScreen from './components/screens/MegaSenaScreen'
+import MegaSenaScreen from './components/screens/MegaSenaScreen.jsx'
 import JogoDoBichoScreen from './components/screens/JogoDoBichoScreen.jsx'
 
 const Tab = createBottomTabNavigator()
