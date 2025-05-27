@@ -1,43 +1,51 @@
-// src/screens/ProdutoScreen.jsx
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Card, Text } from 'react-native-paper';
+import { ScrollView, StyleSheet, Image } from 'react-native';
+import { Card, Text, Title, Paragraph, Button } from 'react-native-paper';
+import axios from 'axios';
 
 export default function ProdutoScreen({ route, navigation }) {
-  console.log("Params recebidos:", route.params);
-  const { productId } = route.params;
+  const { idProduto } = route.params;
   const [produto, setProduto] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`https://dummyjson.com/products/${productId}`)
+    axios.get(`https://dummyjson.com/products/${idProduto}`)
       .then(res => setProduto(res.data))
       .catch(err => console.log(err));
-  }, [productId]);
+  }, []);
 
-  if (!produto) {
-    return <Text style={{ margin: 10 }}>Carregando...</Text>;
-  }
+  if (!produto) return <Text>Carregando produto...</Text>;
 
   return (
     <ScrollView style={styles.container}>
       <Card>
         <Card.Cover source={{ uri: produto.thumbnail }} />
         <Card.Content>
-          <Text variant="titleLarge">{produto.title}</Text>
-          <Text>{produto.description}</Text>
-          <Text style={styles.label}>💲 Preço: ${produto.price}</Text>
-          <Text style={styles.label}>⭐ Avaliação: {produto.rating}</Text>
-          <Text style={styles.label}>📦 Estoque: {produto.stock}</Text>
-          <Text style={styles.label}>🏷 Marca: {produto.brand}</Text>
-          <Text style={styles.label}>📁 Categoria: {produto.category}</Text>
-        </Card.Content>
-        <Card.Actions>
-          <Button mode="outlined" onPress={() => navigation.goBack()}>
+          <Title>{produto.title}</Title>
+          <Paragraph>{produto.description}</Paragraph>
+          <Text>💲Preço: ${produto.price}</Text>
+          <Text>🏷 Marca: {produto.brand}</Text>
+          <Text>📦 Estoque: {produto.stock}</Text>
+          <Text>📊 Avaliação: {produto.rating} ⭐</Text>
+          <Text>🔖 Categoria: {produto.category}</Text>
+          <Text style={styles.subtitulo}>📦 Dimensões:</Text>
+          <Text>Largura: {produto.dimensions?.width} cm</Text>
+          <Text>Altura: {produto.dimensions?.height} cm</Text>
+          <Text>Profundidade: {produto.dimensions?.depth} cm</Text>
+
+          <Text style={styles.subtitulo}>📢 Avaliações:</Text>
+          {produto.reviews?.map((review, index) => (
+            <Card key={index} style={styles.reviewCard}>
+              <Card.Content>
+                <Text>👤 {review.reviewerName}</Text>
+                <Text>⭐ {review.rating} — "{review.comment}"</Text>
+              </Card.Content>
+            </Card>
+          ))}
+
+          <Button mode="contained" onPress={() => navigation.goBack()} style={styles.button}>
             Voltar
           </Button>
-        </Card.Actions>
+        </Card.Content>
       </Card>
     </ScrollView>
   );
@@ -45,9 +53,16 @@ export default function ProdutoScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 10
   },
-  label: {
-    marginTop: 5,
+  subtitulo: {
+    marginTop: 10,
+    fontWeight: 'bold'
   },
+  reviewCard: {
+    marginTop: -10
+  },
+  button: {
+    marginTop: 15
+  }
 });
