@@ -18,7 +18,8 @@ export default function UsuarioScreen({ navigation, route }) {
     })
     .catch(erro => alert('Erro ao buscar usuário!'))
 
-    axios.get("https://dummyjson.com/users/" + idUsuario + "/posts")
+    axios
+    .get("https://dummyjson.com/users/" + idUsuario + "/posts")
       .then(resposta => {
         setPosts(resposta.data.posts)
       })
